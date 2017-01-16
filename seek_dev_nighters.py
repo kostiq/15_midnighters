@@ -8,11 +8,10 @@ def load_attempts():
     api_url = 'https://devman.org/api/challenges/solution_attempts/'
     payload = {'page': '1'}
     pages = requests.get(api_url, params=payload).json()['number_of_pages']
-    # yield from range(1, pages+1)
     for page in range(1, pages):
-        r = requests.get(api_url, params=payload)
+        api_data = requests.get(api_url, params=payload).json()
         payload = {'page': page}
-        yield r.json()['records']
+        yield api_data['records']
 
 
 def filter_midnighters(users_list):
@@ -22,9 +21,9 @@ def filter_midnighters(users_list):
 def get_midnight(record):
     fmt = '%H'
     if record['timestamp']:
-        tz = timezone(record['timezone'])
+        tzone = timezone(record['timezone'])
         sending_time = dt.fromtimestamp(float(record['timestamp']))
-        local_time = tz.localize(sending_time)
+        local_time = tzone.localize(sending_time)
         hour = int(local_time.strftime(fmt))
         if hour > 0 and hour < 6:
             return True
