@@ -40,7 +40,7 @@ def get_set_midnighters(records):
 def print_midnighters(owl_set):
     for user in owl_set:
         print ('{}'.format(user))
-
+        
 
 if __name__ == '__main__':
     for page in load_attempts():
