@@ -5,3 +5,22 @@
 ##Пример запуска: 
 
     python3 seek_dev_nighters.py
+
+##Результат работы скрипта:
+
+    AlexanderBataev
+    vitalypavlenko
+    id331045184
+    РоманКравець
+    danfrid
+    СанькаТихонравова
+    id331045184
+    ЕвгенийВасильев
+    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    i22728350
+    beastrock
+    AlekseyKabishau
+    ИринаСильвестрова
+    polevich_m
+    ДаняГалкин
+    id28616507
