@@ -8,10 +8,12 @@ def load_attempts():
     api_url = 'https://devman.org/api/challenges/solution_attempts/'
     payload = {'page': '1'}
     pages = requests.get(api_url, params=payload).json()['number_of_pages']
-    for page in range(1, pages):
-        api_data = requests.get(api_url, params=payload).json()
-        payload = {'page': page}
-        yield api_data['records']
+    yield from [get_json(api_url, str(page))['records'] for page in range(1, pages)]
+
+
+def get_json(url, page_number):
+    payload = {'page': page_number}
+    return requests.get(url, params=payload).json()
 
 
 def filter_midnighters(users_list):
@@ -32,15 +34,12 @@ def get_midnight(record):
 
 
 def get_set_midnighters(records):
-    owl_set = set()
-    for owl in records:
-        owl_set.add(owl['username'])
-    return owl_set
+    return {owl['username'] for owl in records}
 
 
 def print_midnighters(owl_set):
     for user in owl_set:
-        print ('{} is owl!'.format(user))
+        print ('{}'.format(user))
 
 
 if __name__ == '__main__':
